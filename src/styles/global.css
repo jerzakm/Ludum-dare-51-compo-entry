@@ -1,0 +1,49 @@
+@font-face {
+	font-family: 'Billy';
+	src: url('/fonts/Billy-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Billy';
+	src: url('/fonts/Billy-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Billy';
+	src: url('/fonts/Billy-Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-display: swap;
+}
+
+:root {
+	--color-primary: rgb(0, 255, 136);
+	--color-secondary: rgb(255, 0, 242);
+	--color-text: white;
+	--color-background: #272727;
+	--color-surface: #b3b3b380;
+	--gui-hp-color: #ff0000;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-weight: 500;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-weight: 300;
+	font-size: 24px;
+	background-color: var(--color-background);
+	color: var(--color-text);
+	font-family: 'Billy', monospace;
+}
+
+p {
+	text-align: justify;
+}
