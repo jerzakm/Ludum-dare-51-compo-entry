@@ -1,9 +1,18 @@
 <script lang="ts">
+	import { ARCANE_SHIELD_DEF_MAX_HP } from '$lib/game/constants';
 	import type { BattleState } from '$lib/game/dataStructure';
+	import { defenseShieldPosition } from './guiStores';
+	import StatusBar from './StatusBar.svelte';
 
 	export let swapTimer: number;
 	export let name: string;
 	export let state: BattleState;
+
+	let shieldLoc = $defenseShieldPosition;
+
+	defenseShieldPosition.subscribe((v) => {
+		shieldLoc = v;
+	});
 </script>
 
 <gui class="absolute w-full h-full pointer-events-none">
@@ -20,4 +29,14 @@
 		</div>
 		<h1>Battle {state.currentMap + 1}/{state.maps.length}</h1>
 	</div>
+
+	<!-- Arcane Defense HP Bar -->
+	<StatusBar
+		currentHp={state.maps[state.currentMap].shieldHp}
+		maxHp={ARCANE_SHIELD_DEF_MAX_HP}
+		color={'blue'}
+		name={'Arcane defense shield'}
+		shields={state.maps[state.currentMap].shieldDef}
+		position={{ x: shieldLoc.x + 40, y: shieldLoc.y + 0 }}
+	/>
 </gui>

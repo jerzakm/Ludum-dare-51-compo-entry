@@ -1,3 +1,4 @@
+import { ARCANE_SHIELD_DEF_MAX_HP } from './constants';
 import type { BattleMap, Tile } from './dataStructure';
 
 export const generateMap = (
@@ -24,7 +25,11 @@ export const generateMap = (
 		id: 0,
 		objects: [],
 		playerLocation: { x: Math.floor(width / 2), y: Math.floor(height / 2) },
-		shieldHp: 0,
+		shieldHp: Math.max(
+			Math.floor(ARCANE_SHIELD_DEF_MAX_HP * 0.1 + ARCANE_SHIELD_DEF_MAX_HP * rng() * 0.9),
+			1
+		),
+		shieldDef: 0,
 		type: type,
 		mapSize: { x: width, y: height }
 	};

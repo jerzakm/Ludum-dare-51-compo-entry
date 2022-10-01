@@ -1,1 +1,2 @@
 export const MAP_CHANGE_TIME_SECONDS = 10;
+export const ARCANE_SHIELD_DEF_MAX_HP = 20;

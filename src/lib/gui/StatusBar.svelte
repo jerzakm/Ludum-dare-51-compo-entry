@@ -1,6 +1,9 @@
 <script lang="ts">
 	export let currentHp: number;
 	export let maxHp: number;
+
+	export let color: 'green' | 'red' | 'blue' = 'red';
+
 	export let position = {
 		x: 0,
 		y: 0
@@ -27,7 +30,7 @@
 			)}, 1fr); background-color: rgba(180,180,180, 0.5);`}
 		>
 			<img
-				src="gui/hp_verbar.png"
+				src={`gui/hp_verbar_${color}.png`}
 				class="absolute"
 				style={`z-index: 0; width:${hpCellSize * currentHp}px; height: ${HP_BAR_HEIGHT}px;`}
 				alt={`Healthbar`}
@@ -48,7 +51,7 @@
 		</shields>
 	</div>
 
-	<div class="text-xs -mt-3">
+	<div class="text-xs ">
 		HP {currentHp} / {maxHp}
 	</div>
 </bar>

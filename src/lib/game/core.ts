@@ -5,6 +5,7 @@ import { xoshiro128ss } from './util';
 export const initBattle = (location: string) => {
 	const rng = xoshiro128ss(location);
 	const state: BattleState = {
+		rng,
 		hp: 10,
 		mp: 0,
 		cards: {

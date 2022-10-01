@@ -1,4 +1,5 @@
 export interface BattleState {
+	rng: () => number | undefined;
 	startingDifficulty: number;
 	currentMap: number;
 	timer: number;
@@ -18,6 +19,7 @@ export interface BattleState {
 export interface BattleMap {
 	id: number;
 	shieldHp: number;
+	shieldDef: number;
 	grid: Tile[][];
 	enemies: Enemy[];
 	allies: Ally[];

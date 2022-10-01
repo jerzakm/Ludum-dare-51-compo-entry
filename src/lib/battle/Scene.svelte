@@ -24,8 +24,6 @@
 	$: currentMap = state;
 
 	const MAP_SPREAD = 50;
-
-	let lastSwap = 0;
 </script>
 
 <PerspectiveCamera fov={24} position={{ x: MAP_SPREAD * state.currentMap + 7, y: 15, z: 13 }}>
@@ -42,7 +40,7 @@
 
 {#each state.maps as map, i}
 	<Group position={{ x: MAP_SPREAD * i, z: 0 * i }} rotation={{ y: DEG2RAD * 90 }}>
-		<DefenseShield position={{ z: -0.75, y: 0.5, x: 2 }} />
+		<DefenseShield position={{ z: -0.75, y: 0.5, x: 2 }} active={i == state.currentMap} />
 		<Mesh
 			geometry={new PlaneGeometry(5, 5)}
 			material={new MeshBasicMaterial({ color: 0x005500 })}
