@@ -1,13 +1,6 @@
 <script lang="ts">
 	import { PlaneGeometry, MeshBasicMaterial } from 'three';
-	import {
-		AmbientLight,
-		Mesh,
-		PerspectiveCamera,
-		OrbitControls,
-		useFrame,
-		Group
-	} from '@threlte/core';
+	import { AmbientLight, Mesh, PerspectiveCamera, OrbitControls, Group } from '@threlte/core';
 	import { DEG2RAD } from 'three/src/math/MathUtils';
 	import type { BattleState } from '$lib/game/dataStructure';
 	import Ground from './Ground.svelte';
@@ -16,13 +9,6 @@
 	import DefenseShield from './DefenseShield.svelte';
 
 	export let state: BattleState;
-
-	/* generate fifty iterations, show the last one */
-	// for (var i = 49; i >= 0; i--) {
-	// 	map.create();
-	// }
-
-	$: currentMap = state;
 
 	const MAP_SPREAD = 50;
 </script>
@@ -51,13 +37,13 @@
 			geometry={new PlaneGeometry(5, 5)}
 			material={new MeshBasicMaterial({ color: 0x005500 })}
 			rotation={{ x: DEG2RAD * -90 }}
-			position={{ z: -2.5, y: 0, x: 2 }}
+			position={{ z: -2.5, y: -0.05, x: 2 }}
 		/>
 		<Mesh
 			geometry={new PlaneGeometry(5, 5)}
 			material={new MeshBasicMaterial({ color: 0x550000 })}
 			rotation={{ x: DEG2RAD * -90 }}
-			position={{ z: 15.5, y: 0, x: 2 }}
+			position={{ z: 15.5, y: -0.05, x: 2 }}
 		/>
 		{#each map.enemies as enemy}
 			<Enemy {enemy} />

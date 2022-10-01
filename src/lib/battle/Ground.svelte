@@ -17,7 +17,7 @@
 <InstancedMesh {geometry} {material}>
 	{#each tiles as row, x}
 		{#each row as col, y}
-			<Instance position={{ x, z: y }} />
+			<Instance position={{ x, z: y, y: -0.05 }} />
 		{/each}
 	{/each}
 </InstancedMesh>
