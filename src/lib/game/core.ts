@@ -21,10 +21,9 @@ export const initBattle = (location: string) => {
 		timer: 0
 	};
 
-	state.maps.push(generateMap(rng, 30, 30, 'forrest'));
-	state.maps.push(generateMap(rng, 30, 30, 'desert'));
-	state.maps.push(generateMap(rng, 30, 30, 'dungeon'));
-	state.maps.push(generateMap(rng, 30, 30, 'mountains'));
+	state.maps.push(generateMap(rng, 5, 15, 'desert'));
+	state.maps.push(generateMap(rng, 5, 15, 'grass'));
+	state.maps.push(generateMap(rng, 5, 15, 'dungeon'));
 
 	return state;
 };

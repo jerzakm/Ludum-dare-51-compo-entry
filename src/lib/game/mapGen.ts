@@ -4,7 +4,7 @@ export const generateMap = (
 	rng: () => number,
 	width: number,
 	height: number,
-	type: 'forrest' | 'dungeon' | 'desert' | 'mountains'
+	type: 'grass' | 'dungeon' | 'desert'
 ) => {
 	const tiles: Tile[][] = [];
 
@@ -20,12 +20,13 @@ export const generateMap = (
 	const map: BattleMap = {
 		allies: [],
 		enemies: [],
-		grid: [],
+		grid: tiles,
 		id: 0,
 		objects: [],
-		playerLocation: { x: 0, y: 0 },
+		playerLocation: { x: Math.floor(width / 2), y: Math.floor(height / 2) },
 		shields: 0,
-		type: 'desert'
+		type: type,
+		mapSize: { x: width, y: height }
 	};
 
 	return map;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Canvas } from '@threlte/core';
-	import Scene from './Scene.svelte';
+	import Scene from '$lib/battle/Scene.svelte';
 	import { onMount } from 'svelte';
 	import { initBattle } from '$lib/game/core';
 
@@ -12,15 +12,14 @@
 		towerId = 'atlantis';
 	}
 
-	initBattle(towerId);
-	console.log(towerId);
+	const state = initBattle(towerId);
 
 	onMount(() => {});
 </script>
 
 <div>
 	<Canvas frameloop={'always'}>
-		<Scene />
+		<Scene {state} />
 	</Canvas>
 </div>
 

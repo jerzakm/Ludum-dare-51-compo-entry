@@ -36,6 +36,7 @@
 		"@threlte/core": "^4.3.2",
 		"@threlte/extras": "^4.3.0",
 		"mapbox-gl": "^2.10.0",
+		"rot-js": "^2.2.0",
 		"three": "^0.145.0"
 	}
 }

@@ -21,8 +21,9 @@ export interface BattleMap {
 	enemies: Enemy[];
 	allies: Ally[];
 	objects: any[];
+	mapSize: Position;
 	playerLocation: Position;
-	type: 'forrest' | 'dungeon' | 'desert' | 'mountains';
+	type: 'grass' | 'dungeon' | 'desert';
 }
 
 export interface Tile {
