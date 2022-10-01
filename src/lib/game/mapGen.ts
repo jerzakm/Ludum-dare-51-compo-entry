@@ -13,7 +13,8 @@ export const generateMap = (
 		tiles.push([]);
 		for (let y = 0; y < height; y++) {
 			tiles[x][y] = {
-				type: 'ground'
+				type: 'ground',
+				enemies: []
 			};
 		}
 	}

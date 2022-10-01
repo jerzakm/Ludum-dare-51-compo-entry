@@ -1,4 +1,5 @@
-import type { BattleMap, Enemy } from '../dataStructure';
+import type { BattleMap, BattleState, Enemy } from '../dataStructure';
+import { aiMove, attackShield } from './commonMoves';
 
 export const makeOrc = (level: number): Enemy => {
 	//
@@ -10,24 +11,30 @@ export const makeOrc = (level: number): Enemy => {
 		shields: 1,
 		sprite: 'orc',
 		size: { width: 1, height: 1 },
-		moveSpeed: 1,
-		atkValue: 1,
+		moveSpeed: 2,
+		atkValue: 2,
 		healValue: 0,
 		range: 1,
 		type: 'meele',
 		alive: true,
 		position: { x: 2, y: 14 },
 		spawned: false,
-		processTurn: processOrcTurn
+		processTurn: processOrcTurn,
+		ai: ['move', 'attack']
 	};
 
 	return orc;
 };
 
-function processOrcTurn(enemy: Enemy, map: BattleMap) {
-	// move to the left
-	if (enemy.position.x > 0) {
-		enemy.position.x -= 1;
+function processOrcTurn(enemy: Enemy, map: BattleMap, state: BattleState) {
+	for (const action of enemy.ai) {
+		if (action == 'move') {
+			aiMove(enemy, map);
+		}
+		if (action == 'attack') {
+			attackShield(enemy, map, state);
+		}
 	}
-	return map;
+
+	return state;
 }

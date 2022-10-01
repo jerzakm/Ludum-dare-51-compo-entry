@@ -4,6 +4,7 @@
 	import { MeshInstance, useFrame } from '@threlte/core';
 	import { get } from 'svelte/store';
 	import { BoxGeometry, Mesh, MeshPhongMaterial } from 'three';
+	import { DEG2RAD } from 'three/src/math/MathUtils';
 
 	export let active = false;
 	const geometry = new BoxGeometry(5, 1, 0.5);

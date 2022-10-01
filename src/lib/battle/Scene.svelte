@@ -27,11 +27,12 @@
 
 {#each state.maps as map, i}
 	<Group
-		position={{ x: MAP_SPREAD * i * state.currentMap, z: 0 * i }}
+		position={{ x: 200 * (state.currentMap == i ? 0 : 1), z: 0 * i }}
 		rotation={{ y: DEG2RAD * 90 }}
 	>
 		<Ground tiles={map.grid} terrainType={map.type} />
 		<DefenseShield position={{ z: -0.75, y: 0.5, x: 2 }} active={i == state.currentMap} />
+
 		<!-- Spawning pads -->
 		<Mesh
 			geometry={new PlaneGeometry(5, 5)}

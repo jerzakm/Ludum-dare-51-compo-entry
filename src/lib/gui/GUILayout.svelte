@@ -27,7 +27,10 @@
 				>Kill or delay your enemies to allow scholars to save precious arcane knowledge.</span
 			>
 		</div>
-		<h1>Battle {state.currentMap + 1}/{state.maps.length}</h1>
+		<div class="flex flex-col">
+			<h1>Battle {state.currentMap + 1}/{state.maps.length}</h1>
+			<span>{state.maps[state.currentMap].type}</span>
+		</div>
 	</div>
 
 	<!-- Arcane Defense HP Bar -->

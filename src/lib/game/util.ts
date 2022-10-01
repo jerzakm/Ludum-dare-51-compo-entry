@@ -1,3 +1,6 @@
+import { MAP_HEIGHT, MAP_WIDTH } from './constants';
+import type { BattleMap, Enemy, Tile } from './dataStructure';
+
 // https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
 const cyrb128 = (str: string) => {
 	let h1 = 1779033703,
@@ -37,4 +40,17 @@ export const xoshiro128ss = (seed: string) => {
 		d = (d << 11) | (d >>> 21);
 		return (r >>> 0) / 4294967296;
 	};
+};
+
+export const calculateTileOccupancy = (map: BattleMap) => {
+	for (let x = 0; x < MAP_HEIGHT; x++) {
+		for (let y = 0; y < MAP_WIDTH; y++) {
+			map.grid[x][y].enemies = [];
+		}
+	}
+	for (const enemy of map.enemies) {
+		if (enemy.alive) {
+			map.grid[enemy.position.x][enemy.position.y].enemies.push(enemy);
+		}
+	}
 };

@@ -33,8 +33,10 @@ export interface BattleMap {
 
 export interface Tile {
 	type: 'ground' | 'hazard' | 'obstacle' | 'wall';
-	enemies?: Enemy[];
+	enemies: Enemy[];
 }
+
+type AiAction = 'move' | 'attack' | 'heal';
 
 export interface Enemy {
 	name: string;
@@ -51,7 +53,8 @@ export interface Enemy {
 	alive: boolean;
 	spawned: boolean;
 	position: Position;
-	processTurn: (enemy: Enemy, state: BattleMap) => BattleMap;
+	ai: AiAction[];
+	processTurn: (enemy: Enemy, map: BattleMap, state: BattleState) => BattleState;
 }
 export interface Ally {}
 
