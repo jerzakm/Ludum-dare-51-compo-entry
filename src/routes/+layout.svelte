@@ -17,6 +17,4 @@
 	});
 </script>
 
-<main class="flex flex-col items-center h-screen justify-center">
-	<slot />
-</main>
+<slot />

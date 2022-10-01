@@ -24,21 +24,25 @@
 			container: mapEl,
 			style: 'mapbox://styles/jerzakm/cl3njkens000614s1xutw0naf',
 			center: [config.lng, config.lat],
-			zoom: config.zoom,
-			projection: {
-				name: 'globe'
-			}
+			zoom: config.zoom
+			// projection: {
+			// 	name: 'globe'
+			// }
 		});
 		map = newmap;
 	});
 </script>
 
-<div bind:this={mapEl} class="fixed top-0 left-0 " id="map" />
+<div bind:this={mapEl} id="map" />
 
 <style>
 	#map {
 		width: 100vw;
 		height: 100vh;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
 	}
 	.marker {
 		background-image: url('gui/map_dungeon.png');

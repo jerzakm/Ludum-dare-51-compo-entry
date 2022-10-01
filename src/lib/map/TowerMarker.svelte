@@ -3,7 +3,7 @@
 	import { onDestroy, onMount } from 'svelte';
 
 	export let map: mapboxgl.Map;
-	export let dungeon: {
+	export let tower: {
 		id: string;
 		name: string;
 		img: string;
@@ -11,13 +11,13 @@
 		lngLat: mapboxgl.LngLatLike;
 	};
 
-	console.log(dungeon);
+	console.log(tower);
 
 	let marker: mapboxgl.Marker;
 	let markerEl: HTMLElement;
 
 	onMount(() => {
-		marker = new mapboxgl.Marker(markerEl).setLngLat(dungeon.lngLat).addTo(map);
+		marker = new mapboxgl.Marker(markerEl).setLngLat(tower.lngLat).addTo(map);
 	});
 	onDestroy(() => {
 		// marker.remove();
@@ -27,7 +27,7 @@
 <div bind:this={markerEl} class="marker cursor-pointer " on:click>
 	<div class="flex flex-col items-center marker-content">
 		<img src="gui/map_dungeon.png" class="w-24 h-24 marker-img" />
-		<span class="text-lg   dungeon-name">{dungeon.name}</span>
+		<span class="text-lg   dungeon-name">{tower.name}</span>
 	</div>
 </div>
 
