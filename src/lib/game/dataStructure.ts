@@ -1,5 +1,4 @@
 export interface BattleState {
-	rng: () => number | undefined;
 	startingDifficulty: number;
 	currentMap: number;
 	xp: number;

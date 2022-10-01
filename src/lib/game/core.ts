@@ -4,10 +4,12 @@ import { spawnEnemy } from './enemies/enemySpawner';
 import { generateMap } from './mapGen';
 import { calculateTileOccupancy, xoshiro128ss } from './util';
 
+export let rng: () => number;
+
 export const initBattle = (location: string) => {
-	const rng = xoshiro128ss(location);
+	rng = xoshiro128ss(location);
+
 	let state: BattleState = {
-		rng,
 		hp: 5,
 		mp: 5,
 		xp: 0,
@@ -27,8 +29,8 @@ export const initBattle = (location: string) => {
 	};
 
 	state.maps.push(generateMap(rng, MAP_HEIGHT, MAP_WIDTH, 'desert'));
-	state.maps.push(generateMap(rng, 5, 15, 'grass'));
-	state.maps.push(generateMap(rng, 5, 15, 'dungeon'));
+	state.maps.push(generateMap(rng, MAP_HEIGHT, MAP_WIDTH, 'grass'));
+	state.maps.push(generateMap(rng, MAP_HEIGHT, MAP_WIDTH, 'dungeon'));
 
 	state = spawnEnemies(state);
 
@@ -36,9 +38,12 @@ export const initBattle = (location: string) => {
 };
 
 export const issueCommand = (state: BattleState, type: Command, data: any) => {
+	console.log(type);
 	if (type == 'MAP_CHANGE') {
 		state = mapChange(state);
 		state = spawnEnemies(state);
+	}
+	if (type == 'END_TURN') {
 		state = processEnemyActions(state);
 	}
 	state.commandLog.push({ type, data });
@@ -69,9 +74,10 @@ function spawnEnemies(state: BattleState) {
 			// ADJUST DIFFICULTY / SPAWN RATE HERE
 			if (aliveEnemies < 3) {
 				const newEnemy = spawnEnemy(state.playerLevel);
-				newEnemy.position.x = y;
+				newEnemy.position.x = Math.floor(rng() * MAP_HEIGHT);
 				newEnemy.position.y = MAP_WIDTH - 1;
 				state.maps[state.currentMap].enemies.push(newEnemy);
+				return state;
 			}
 		}
 	}
@@ -89,4 +95,4 @@ function processEnemyActions(state: BattleState) {
 	return state;
 }
 
-type Command = 'MAP_CHANGE';
+type Command = 'MAP_CHANGE' | 'MOVE' | 'END_TURN';

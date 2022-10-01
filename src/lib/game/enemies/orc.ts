@@ -29,7 +29,7 @@ export const makeOrc = (level: number): Enemy => {
 function processOrcTurn(enemy: Enemy, map: BattleMap, state: BattleState) {
 	for (const action of enemy.ai) {
 		if (action == 'move') {
-			aiMove(enemy, map);
+			aiMove(enemy, map, state);
 		}
 		if (action == 'attack') {
 			attackShield(enemy, map, state);

@@ -7,10 +7,11 @@
 
 	import { page } from '$app/stores';
 	import GuiLayout from '$lib/gui/GUILayout.svelte';
+	import { MAP_CHANGE_TIME_SECONDS } from '$lib/game/constants';
 
 	let towerId = $page.url.searchParams.get('tower') || 'atlantis';
 
-	let swapTimer = 10;
+	let swapTimer = MAP_CHANGE_TIME_SECONDS;
 
 	let state = initBattle(towerId);
 </script>
@@ -20,6 +21,9 @@
 	<Canvas frameloop={'always'}>
 		<TimeSystem
 			bind:swapTimer
+			on:endTurn={() => {
+				state = issueCommand(state, 'END_TURN', {});
+			}}
 			on:mapChange={() => {
 				state = issueCommand(state, 'MAP_CHANGE', {});
 			}}

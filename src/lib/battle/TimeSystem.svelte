@@ -4,20 +4,41 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	let lastSwap = 0;
+	export let swapTimer = MAP_CHANGE_TIME_SECONDS;
 
-	export let paused = false;
+	let start: number | undefined;
+	let previousTimeStamp = 0;
 
-	export let swapTimer = 10;
-	useFrame((threlte) => {
-		const time = threlte.clock.elapsedTime;
+	let paused = false;
 
-		if (!paused) {
-			swapTimer = MAP_CHANGE_TIME_SECONDS - (time - lastSwap);
-			if (time - lastSwap >= MAP_CHANGE_TIME_SECONDS) {
-				lastSwap = time;
-				dispatch('mapChange');
-			}
+	function mapChange() {
+		setTimeout(() => {
+			dispatch('mapChange');
+			paused = false;
+		}, 100);
+		paused = true;
+
+		swapTimer = MAP_CHANGE_TIME_SECONDS;
+	}
+
+	function step(timestamp: number) {
+		let delta = (timestamp - previousTimeStamp) * 0.001;
+		if (start === undefined) {
+			start = timestamp;
 		}
-	});
+
+		if (!paused) swapTimer -= delta;
+
+		if (swapTimer <= 0) {
+			dispatch('endTurn');
+			mapChange();
+		}
+
+		const elapsed = timestamp - start;
+
+		previousTimeStamp = timestamp * 1;
+		window.requestAnimationFrame(step);
+	}
+
+	window.requestAnimationFrame(step);
 </script>

@@ -1,16 +1,32 @@
 <script lang="ts">
 	import { PlaneGeometry, MeshBasicMaterial } from 'three';
-	import { AmbientLight, Mesh, PerspectiveCamera, OrbitControls, Group } from '@threlte/core';
+	import {
+		AmbientLight,
+		Mesh,
+		PerspectiveCamera,
+		OrbitControls,
+		Group,
+		useFrame
+	} from '@threlte/core';
 	import { DEG2RAD } from 'three/src/math/MathUtils';
 	import type { BattleState } from '$lib/game/dataStructure';
 	import Ground from './Ground.svelte';
 	import Enemy from './Enemy.svelte';
 	import { get } from 'svelte/store';
 	import DefenseShield from './DefenseShield.svelte';
+	import { animationQueue } from '$lib/game/animationQueue';
 
 	export let state: BattleState;
 
+	let animationState = state;
+
 	const MAP_SPREAD = 50;
+
+	useFrame(() => {
+		if (animationQueue.length > 0) {
+			animationState = animationQueue[0].state;
+		}
+	});
 </script>
 
 <PerspectiveCamera fov={24} position={{ x: MAP_SPREAD * 0 + 7, y: 15, z: 13 }}>

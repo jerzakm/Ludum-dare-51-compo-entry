@@ -12,6 +12,9 @@
 	} from 'three';
 	import { DEG2RAD } from 'three/src/math/MathUtils';
 
+	import { cubicIn, cubicOut } from 'svelte/easing';
+	import { tweened } from 'svelte/motion';
+
 	export let enemy: Enemy;
 
 	const texture = useTexture(`enemies/${enemy.sprite}.png`);
