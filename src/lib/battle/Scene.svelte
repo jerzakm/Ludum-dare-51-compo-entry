@@ -27,9 +27,9 @@
 	const MAP_SPREAD = 50;
 </script>
 
-<PerspectiveCamera fov={24} position={{ x: MAP_SPREAD * state.currentMap + 7, y: 15, z: 13 }}>
+<PerspectiveCamera fov={24} position={{ x: MAP_SPREAD * 0 + 7, y: 15, z: 13 }}>
 	<OrbitControls
-		target={{ x: MAP_SPREAD * state.currentMap + 7, y: 0, z: 0 }}
+		target={{ x: MAP_SPREAD * 0 + 7, y: 0, z: 0 }}
 		maxPolarAngle={DEG2RAD * 90}
 		minPolarAngle={DEG2RAD * 30}
 		autoRotate={false}
@@ -40,7 +40,10 @@
 </PerspectiveCamera>
 
 {#each state.maps as map, i}
-	<Group position={{ x: MAP_SPREAD * i, z: 0 * i }} rotation={{ y: DEG2RAD * 90 }}>
+	<Group
+		position={{ x: MAP_SPREAD * i * state.currentMap, z: 0 * i }}
+		rotation={{ y: DEG2RAD * 90 }}
+	>
 		<Ground tiles={map.grid} terrainType={map.type} />
 		<DefenseShield position={{ z: -0.75, y: 0.5, x: 2 }} active={i == state.currentMap} />
 		<!-- Spawning pads -->

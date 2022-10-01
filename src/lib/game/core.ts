@@ -6,7 +6,7 @@ import { xoshiro128ss } from './util';
 
 export const initBattle = (location: string) => {
 	const rng = xoshiro128ss(location);
-	const state: BattleState = {
+	let state: BattleState = {
 		rng,
 		hp: 5,
 		mp: 5,
@@ -29,6 +29,8 @@ export const initBattle = (location: string) => {
 	state.maps.push(generateMap(rng, 5, 15, 'desert'));
 	state.maps.push(generateMap(rng, 5, 15, 'grass'));
 	state.maps.push(generateMap(rng, 5, 15, 'dungeon'));
+
+	state = spawnEnemies(state);
 
 	return state;
 };
