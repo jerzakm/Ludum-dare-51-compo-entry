@@ -51,7 +51,7 @@ export interface Enemy {
 	alive: boolean;
 	spawned: boolean;
 	position: Position;
-	processTurn: () => BattleState;
+	processTurn: (enemy: Enemy, state: BattleMap) => BattleMap;
 }
 export interface Ally {}
 

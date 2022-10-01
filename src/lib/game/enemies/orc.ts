@@ -1,4 +1,4 @@
-import type { Enemy } from '../dataStructure';
+import type { BattleMap, Enemy } from '../dataStructure';
 
 export const makeOrc = (level: number): Enemy => {
 	//
@@ -24,8 +24,10 @@ export const makeOrc = (level: number): Enemy => {
 	return orc;
 };
 
-function processOrcTurn() {
-	console.log('processing orc turn..');
-	let k: any;
-	return k;
+function processOrcTurn(enemy: Enemy, map: BattleMap) {
+	// move to the left
+	if (enemy.position.x > 0) {
+		enemy.position.x -= 1;
+	}
+	return map;
 }

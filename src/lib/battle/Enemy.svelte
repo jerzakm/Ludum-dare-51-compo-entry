@@ -14,8 +14,6 @@
 
 	export let enemy: Enemy;
 
-	console.log(enemy);
-
 	const texture = useTexture(`enemies/${enemy.sprite}.png`);
 	texture.minFilter = NearestFilter;
 	texture.magFilter = NearestFilter;

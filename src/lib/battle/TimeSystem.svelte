@@ -4,17 +4,20 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	let lastSwap = 0;
+	let lastSwap = 10;
+
+	export let paused = false;
 
 	export let swapTimer = 10;
 	useFrame((threlte) => {
 		const time = threlte.clock.elapsedTime;
 
-		swapTimer = lastSwap - time;
-
-		if (time - lastSwap >= MAP_CHANGE_TIME_SECONDS) {
-			lastSwap = time;
-			dispatch('mapChange');
+		if (!paused) {
+			swapTimer = lastSwap - time;
+			if (time - lastSwap >= MAP_CHANGE_TIME_SECONDS) {
+				lastSwap = time;
+				dispatch('mapChange');
+			}
 		}
 	});
 </script>

@@ -69,4 +69,14 @@ function spawnEnemies(state: BattleState) {
 	return state;
 }
 
+function processEnemyActions(state: BattleState) {
+	const currentMap = state.maps[state.currentMap];
+
+	for (let i = 0; i < state.maps[state.currentMap].enemies.length; i++) {
+		const enemy = state.maps[state.currentMap].enemies[i];
+		enemy.processTurn(enemy, currentMap);
+	}
+	return state;
+}
+
 type Command = 'MAP_CHANGE';
