@@ -17,7 +17,7 @@ export interface BattleState {
 
 export interface BattleMap {
 	id: number;
-	shields: number;
+	shieldHp: number;
 	grid: Tile[][];
 	enemies: Enemy[];
 	allies: Ally[];

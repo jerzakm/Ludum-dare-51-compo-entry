@@ -24,7 +24,7 @@ export const generateMap = (
 		id: 0,
 		objects: [],
 		playerLocation: { x: Math.floor(width / 2), y: Math.floor(height / 2) },
-		shields: 0,
+		shieldHp: 0,
 		type: type,
 		mapSize: { x: width, y: height }
 	};

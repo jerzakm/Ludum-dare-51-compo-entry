@@ -6,20 +6,23 @@
 	import { initBattle, issueCommand } from '$lib/game/core';
 
 	import { page } from '$app/stores';
+	import GuiLayout from '$lib/gui/GUILayout.svelte';
 
-	let towerId = $page.url.searchParams.get('tower');
+	let towerId = $page.url.searchParams.get('tower') || 'atlantis';
 
-	if (!towerId) {
-		towerId = 'atlantis';
-	}
+	let swapTimer = 10;
+
+	$: console.log(swapTimer);
 
 	let state = initBattle(towerId);
 	$: console.log(state);
 </script>
 
 <div>
+	<GuiLayout {swapTimer} name={towerId} {state} />
 	<Canvas frameloop={'always'}>
 		<TimeSystem
+			bind:swapTimer
 			on:mapChange={() => {
 				state = issueCommand(state, 'MAP_CHANGE', {});
 			}}

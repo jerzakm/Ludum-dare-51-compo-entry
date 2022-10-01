@@ -12,6 +12,7 @@
 	import type { BattleState } from '$lib/game/dataStructure';
 	import Ground from './Ground.svelte';
 	import { get } from 'svelte/store';
+	import DefenseShield from './DefenseShield.svelte';
 
 	export let state: BattleState;
 
@@ -41,6 +42,7 @@
 
 {#each state.maps as map, i}
 	<Group position={{ x: MAP_SPREAD * i, z: 0 * i }} rotation={{ y: DEG2RAD * 90 }}>
+		<DefenseShield position={{ z: -0.75, y: 0.5, x: 2 }} />
 		<Mesh
 			geometry={new PlaneGeometry(5, 5)}
 			material={new MeshBasicMaterial({ color: 0x005500 })}
