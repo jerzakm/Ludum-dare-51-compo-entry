@@ -2,6 +2,8 @@ export interface BattleState {
 	rng: () => number | undefined;
 	startingDifficulty: number;
 	currentMap: number;
+	xp: number;
+	playerLevel: number;
 	timer: number;
 	paused: boolean;
 	maps: BattleMap[];
@@ -31,9 +33,26 @@ export interface BattleMap {
 
 export interface Tile {
 	type: 'ground' | 'hazard' | 'obstacle' | 'wall';
+	enemies?: Enemy[];
 }
 
-export interface Enemy {}
+export interface Enemy {
+	name: string;
+	currentHp: number;
+	maxHp: number;
+	shields: number;
+	sprite: string;
+	size: { width: number; height: number };
+	moveSpeed: number;
+	type: 'ranged' | 'meele' | 'healer';
+	atkValue: number;
+	healValue: number;
+	range: number;
+	alive: boolean;
+	spawned: boolean;
+	position: Position;
+	processTurn: () => BattleState;
+}
 export interface Ally {}
 
 export interface Card {

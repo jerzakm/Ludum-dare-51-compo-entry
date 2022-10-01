@@ -12,10 +12,7 @@
 
 	let swapTimer = 10;
 
-	$: console.log(swapTimer);
-
 	let state = initBattle(towerId);
-	$: console.log(state);
 </script>
 
 <div>

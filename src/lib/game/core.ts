@@ -1,5 +1,6 @@
 import { BASE_MANA_REGEN, BASE_MAX_MANA } from './constants';
 import type { BattleState } from './dataStructure';
+import { spawnEnemy } from './enemies/enemySpawner';
 import { generateMap } from './mapGen';
 import { xoshiro128ss } from './util';
 
@@ -7,8 +8,10 @@ export const initBattle = (location: string) => {
 	const rng = xoshiro128ss(location);
 	const state: BattleState = {
 		rng,
-		hp: 10,
-		mp: 0,
+		hp: 5,
+		mp: 5,
+		xp: 0,
+		playerLevel: 1,
 		cards: {
 			discard: [],
 			draw: [],
@@ -33,8 +36,8 @@ export const initBattle = (location: string) => {
 export const issueCommand = (state: BattleState, type: Command, data: any) => {
 	if (type == 'MAP_CHANGE') {
 		state = mapChange(state);
+		state = spawnEnemies(state);
 	}
-
 	state.commandLog.push({ type, data });
 
 	return state;
@@ -45,8 +48,22 @@ function mapChange(state: BattleState) {
 	state.currentMap = nextMap;
 
 	// MANA REGEN ON MAP CHANGE
-
 	state.mp = Math.min(state.mp + BASE_MANA_REGEN, BASE_MAX_MANA);
+	return state;
+}
+
+function spawnEnemies(state: BattleState) {
+	const aliveEnemies = state.maps[state.currentMap].enemies.filter((e) => {
+		return e.alive != true;
+	}).length;
+
+	if (aliveEnemies < 1 + state.playerLevel) {
+		console.log('spawning enemy');
+		//spawn enemy
+		const newEnemy = spawnEnemy(state.playerLevel);
+		state.maps[state.currentMap].enemies.push(newEnemy);
+	}
+
 	return state;
 }
 
