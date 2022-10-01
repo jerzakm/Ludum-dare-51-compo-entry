@@ -12,6 +12,7 @@ export interface BattleState {
 		discard: Card[];
 		draw: Card[];
 	};
+	commandLog: any[];
 }
 
 export interface BattleMap {

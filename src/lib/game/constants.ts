@@ -1,0 +1,1 @@
+export const MAP_CHANGE_TIME_SECONDS = 10;
