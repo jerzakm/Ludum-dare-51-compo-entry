@@ -36,7 +36,18 @@ export interface Tile {
 export interface Enemy {}
 export interface Ally {}
 
-export interface Card {}
+export interface Card {
+	id: string;
+	name: string;
+	manaCost: string;
+	type: 'heal' | 'atk_meele' | 'atk_ranged' | 'point' | 'spawn';
+	shape: 'point' | 'wall' | 'line' | 'square';
+	atkValue: number;
+	healValue: number;
+	spellLevel: number;
+	repeat?: number;
+	burn: boolean;
+}
 
 export interface Objects {}
 

@@ -1,3 +1,4 @@
+import { BASE_MANA_REGEN, BASE_MAX_MANA } from './constants';
 import type { BattleState } from './dataStructure';
 import { generateMap } from './mapGen';
 import { xoshiro128ss } from './util';
@@ -31,13 +32,22 @@ export const initBattle = (location: string) => {
 
 export const issueCommand = (state: BattleState, type: Command, data: any) => {
 	if (type == 'MAP_CHANGE') {
-		const nextMap = state.currentMap + 1 > state.maps.length - 1 ? 0 : state.currentMap + 1;
-		state.currentMap = nextMap;
+		state = mapChange(state);
 	}
 
 	state.commandLog.push({ type, data });
 
 	return state;
 };
+
+function mapChange(state: BattleState) {
+	const nextMap = state.currentMap + 1 > state.maps.length - 1 ? 0 : state.currentMap + 1;
+	state.currentMap = nextMap;
+
+	// MANA REGEN ON MAP CHANGE
+
+	state.mp = Math.min(state.mp + BASE_MANA_REGEN, BASE_MAX_MANA);
+	return state;
+}
 
 type Command = 'MAP_CHANGE';
