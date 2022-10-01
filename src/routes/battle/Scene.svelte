@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MeshStandardMaterial, SphereGeometry } from 'three';
+	import { MeshStandardMaterial, BoxGeometry } from 'three';
 	import {
 		AmbientLight,
 		DirectionalLight,
@@ -12,24 +12,32 @@
 	} from '@threlte/core';
 	import { DEG2RAD } from 'three/src/math/MathUtils';
 
-	const geometry = new SphereGeometry(0.5);
+	const geometry = new BoxGeometry(1, 0.5, 1);
 	const material = new MeshStandardMaterial();
 
-	const positions: { x: number; z: number }[] = [];
-	const rows = 30;
-	for (let x = 0; x < rows; x += 1) {
-		for (let z = 0; z < rows; z += 1) {
+	const width = 10;
+	const height = 10;
+
+	/* generate fifty iterations, show the last one */
+	// for (var i = 49; i >= 0; i--) {
+	// 	map.create();
+	// }
+
+	const positions: { x: number; z: number; y: number }[] = [];
+	for (let x = 0; x < width; x += 1) {
+		for (let z = 0; z < height; z += 1) {
 			positions.push({
 				x,
+				y: Math.random() * 0.02,
 				z
 			});
 		}
 	}
 
 	let cameraPosition = {
-		x: 10,
-		y: 10,
-		z: 15
+		x: 50,
+		y: 50,
+		z: 25
 	};
 
 	const { size } = useThrelte();
