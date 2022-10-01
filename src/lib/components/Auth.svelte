@@ -1,7 +1,5 @@
 <script lang="ts">
-	import type { Provider } from '@supabase/supabase-js';
 	import { anonSignIn, magicLinkSignIn, socialSignIn } from '../auth';
-	import { supabase } from '../supabaseClient';
 
 	let loading = false;
 	let email: string;
@@ -98,7 +96,7 @@
 				you can also continue without logging in. Be warned, some features may not be available and
 				your <b class="text-red-600">progress will be lost</b>.
 			</p>
-			<button class="social-auth github-auth" on:click={anonSignIn}>
+			<button class="social-auth github-auth" on:click={() => anonSignIn()}>
 				<span>Anonymous</span>
 			</button>
 		</div>
