@@ -1,0 +1,39 @@
+<script lang="ts">
+	import { MeshStandardMaterial, SphereGeometry } from 'three';
+	import {
+		AmbientLight,
+		DirectionalLight,
+		InstancedMesh,
+		OrthographicCamera,
+		useThrelte,
+		Mesh
+	} from '@threlte/core';
+
+	const geometry = new SphereGeometry(0.5);
+	const material = new MeshStandardMaterial();
+
+	const positions: { x: number; z: number }[] = [];
+	const rows = 30;
+	for (let x = 0; x < rows; x += 1) {
+		for (let z = 0; z < rows; z += 1) {
+			positions.push({
+				x,
+				z
+			});
+		}
+	}
+
+	const { size } = useThrelte();
+	let zoom = $size.width / 50;
+	$: zoom = $size.width / 50;
+</script>
+
+<OrthographicCamera position={{ x: 50, y: 50, z: 50 }} {zoom} lookAt={{}} />
+
+{#each positions as position}
+	<Mesh {geometry} {material} {position} />
+{/each}
+
+<DirectionalLight position={{ y: 10, z: 5 }} />
+
+<AmbientLight intensity={0} />

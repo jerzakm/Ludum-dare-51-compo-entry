@@ -6,7 +6,7 @@
 
 <main class="flex flex-col items-center h-screen justify-center">
 	<container class="flex flex-col gap-8 items-center ">
-		<h1 class="text-5xl">Wizard's tower defense</h1>
+		<h1 class="text-5xl">LD51 entry</h1>
 		<p>
 			The world is full of secrets. You're an impatient wizard who crawls dungeons by duplicating
 			himself. Although you can be in many places at the same time, your powers and life are not

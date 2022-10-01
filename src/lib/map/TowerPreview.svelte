@@ -25,7 +25,7 @@
 		</p>
 		<div class="flex justify-between gap-6">
 			<a
-				href={`/battle/${selectedTower.id}`}
+				href={`/battle?tower=${selectedTower.id}`}
 				class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center w-full"
 			>
 				Start!
